@@ -1,6 +1,6 @@
 # Orion-PySDK
 
-Python SDK leaf for the **Orion** project (NVIDIA Jetson + STM32) in the
+Python SDK leaf for the **Orion** project (STM32MP157F + STM32) in the
 SiliconCentric `project-managers` fleet.
 
 This leaf provides `orion-sdk`, a Pythonic gRPC client for the `HalService`

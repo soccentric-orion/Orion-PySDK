@@ -135,7 +135,7 @@ Result payloads are uniformly `Result { repeated hal.common.TestResult results =
 - Server side of `HalService` is fully implemented (per `integration/audit_server.md`); Server is the working reference for "what a HalService server does."
 
 ### 3.4 Acadia-OS
-- Yocto image for Raspberry Pi 5. Ships `acadia-client` as a systemd unit (recipes-connectivity/acadia-client). `chrony`/`systemd-timesyncd` configured because gRPC timestamps rely on clock sync (`Acadia-OS/req.md` R4.7).
+- Yocto image for STM32MP157F. Ships `acadia-client` as a systemd unit (recipes-connectivity/acadia-client). `chrony`/`systemd-timesyncd` configured because gRPC timestamps rely on clock sync (`Acadia-OS/req.md` R4.7).
 - **No mDNS / Avahi default for Acadia services.** Default connection is by explicit IP/hostname in `client.conf`. Document the SDK's connection assumption accordingly.
 - TLS material paths are conventional but unused in v1 (lab-subnet trust); leave a seam, no defaults.
 
