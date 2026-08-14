@@ -1,4 +1,4 @@
-# Orion-PySDK — specs Remote: `git@github.com:SiliconCentric/Orion-PySDK.git`
+# Orion-PySDK — specs Remote: `git@github.com:soccentric-orion/Orion-PySDK.git`
 Stack: Python, uv-managed, src layout. Consumes the `HalService` gRPC endpoint exposed by Orion-Client — the same wire contract
 Orion-Server speaks. ## Layout * `orion-sdk/` — everything: source, tooling, docs, examples, the make workflow (setup/ gen/ check/ build).
 * `orion-sdk/src/orion_sdk/` — the package. Import name `orion_sdk`, distribution name `orion-sdk`.
