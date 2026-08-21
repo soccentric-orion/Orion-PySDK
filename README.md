@@ -1,11 +1,37 @@
-# Orion-PySDK Python SDK leaf for the **Orion** project (STM32MP157F + STM32) in the
-SiliconCentric `project-managers` fleet. This leaf provides `orion-sdk`, a Pythonic gRPC client for the `HalService`
-endpoint exposed by `Orion-Client`. The SDK distribution package is
-**`orion-sdk`** (import name `orion_sdk`); a `acadia_sdk` deprecation shim
-re-exports the public surface for callers still on the old name. The SDK source, tooling, docs, examples, and test suite live under
-[`orion-sdk/`](orion-sdk). See [`orion-sdk/README.md`](orion-sdk/README.md)
-for the full API, quickstart, and `make` targets (`setup`, `gen`, `check`,
-`build`). ---
-Part of the `Orion` project in the `project-managers` fleet. See
-`docs/project-managers.md` for the full 9-project/ 8-leaf hierarchy and
-shared conventions.
+# Orion-PySDK
+
+## Project Summary
+
+Orion-PySDK is the Python client library for applications that call the `HalService` endpoint exposed by Orion-Client. The distributable package lives in `orion-sdk/`, uses a `src/orion_sdk` layout, and provides a Pythonic facade over generated private protobuf and gRPC bindings. A caller connects once, discovers modules advertised by the device, obtains a peripheral handle, and invokes one-shot, monitoring, event-based, or long-running work without constructing protobuf messages or handling raw gRPC errors.
+
+The hand-written layer contains channel lifecycle and status-to-exception translation, typed conversion helpers, `Device`, peripheral handles, request builders, session controls, result serialization, and the public exception taxonomy. Generated bindings cover shared HAL messages, the service contract, and module packages. Descriptor-driven generators produce typed dataclasses and protocol code. Examples cover discovery, IMU one-shot and monitoring, event triggers, long-running tests, full self-test, and a small application.
+
+The in-process fake HAL server starts a real gRPC server for tests, so the suite exercises transport and public API together. Tests cover connection, discovery, one-shot results, monitoring, event streams, long-running lifecycle, deprecation compatibility, dataclass round trips, and JSON serialization. Documentation records the direct-to-Client connection model and contract-version handshake. Generated files are private and should be regenerated through the tools. Hardware execution and network security remain deployment concerns.
+
+## Feature Inventory
+
+| # | Name / Description | Implemented? | Test Coverage? | Manual Test |
+|---:|---|---|---|---|
+| 1 | `orion_sdk.connect()` and persistent gRPC channel | Implemented | Covered by `tests/test_connect.py` | [ ] Manual verification required |
+| 2 | Module discovery and peripheral handles | Implemented | Covered by `tests/test_discovery.py` | [ ] Manual verification required |
+| 3 | Typed one-shot execution | Implemented | Covered by `tests/test_oneshot.py` | [ ] Manual verification required |
+| 4 | Monitoring stream | Implemented | Covered by `tests/test_monitor.py` | [ ] Manual verification required |
+| 5 | Event-based trigger stream | Implemented | Covered by `tests/test_event.py` | [ ] Manual verification required |
+| 6 | Long-running lifecycle | Implemented | Covered by `tests/test_long_running.py` | [ ] Manual verification required |
+| 7 | Typed conversion and JSON output | Implemented | Covered by `tests/test_types_roundtrip.py` | [ ] Manual verification required |
+| 8 | gRPC errors translated to `IVVError` | Implemented | Partial: error paths covered | [ ] Manual verification required |
+| 9 | Descriptor-driven proto/type generation | Implemented | Partial: generated surface selective | [ ] Manual verification required |
+| 10 | Legacy `acadia_sdk` deprecation shim | Implemented | Covered by `tests/test_deprecation_shim.py` | [ ] Manual verification required |
+| 11 | Examples and package documentation | Implemented | Unknown: examples not run here | [ ] Manual verification required |
+
+## Build and Test
+
+```bash
+cd orion-sdk
+make setup
+make test
+make check
+make build
+```
+
+See `orion-sdk/docs/quickstart.md`, `docs/api_reference.md`, and `examples/README.md`.
